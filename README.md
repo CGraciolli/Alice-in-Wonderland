@@ -1,4 +1,4 @@
-# Alice-in-Wonderland
+# Alice in Wonderland
 A simple textual analysis of the text from "Alice in Wonderland" by Lewis Carroll.
 
 The objetive is to analyse how many times non-stop words are present in the text of "Alice in Wonderland".
