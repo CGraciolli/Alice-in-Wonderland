@@ -93,7 +93,10 @@ def display_histogram_prob(tokenized):
     for key in keys:
         values.append(dprob[key])
     hist = sns.barplot(x=keys, y=values)
-    hist.set(xlabel="words", ylabel="probabilities", title="Histogram of Word Probabilities")
+    #hist.set(xlabel="words", ylabel="probabilities", title="Histogram of Word Probabilities")
+    hist.set_title("Histogram of Word Probabilities", fontsize=50)
+    hist.set_xlabel("words",fontsize=30)
+    hist.set_ylabel("probabilities",fontsize=30)
     plt.show()
     
     
