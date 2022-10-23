@@ -13,4 +13,5 @@ Then we create a dictionary of probabilities, telling us what is the probability
 
 Finally, we create a histogram from this dictionary of probabilities (for better visualization, we round the probabilities and don´t show the ones that are rounded to zero).
 
-![alice_hist](https://user-images.githubusercontent.com/112963325/197400627-29495cda-20c3-46ed-b519-10991b1d847e.png)
+
+![alice_hist](https://user-images.githubusercontent.com/112963325/197401082-445b5758-aa49-4e81-8db0-8244ec3a4a1f.png)
