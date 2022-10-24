@@ -61,7 +61,6 @@ def word_probability(dic):
     """
     total = sum(list(dic.values()))
     dic_prob = dict(map(lambda x : (x, dic[x]*100/total), dic.keys()))
-    ##could be a filter
     dic_prob_pos = {}
     for key in dic_prob:
         if dic_prob[key] > 0.3:
