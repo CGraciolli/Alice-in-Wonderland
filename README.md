@@ -11,7 +11,13 @@ Now that the data is normalized, we create a frequency dictionary, telling us ho
 
 Then we create a dictionary of probabilities, telling us what is the probability of a word being picked at random from all the non-stop words from the text.
 
-Finally, we create a histogram from this dictionary of probabilities (for better visualization, we round the probabilities and don´t show the ones that are rounded to zero).
+Finally, we create two histograms:  
+* The first displays how many times non-stop words appear in the text (be show only the top 30 in order to improve visualization)
+![alice_hist_freq](https://user-images.githubusercontent.com/112963325/197467721-d2c5fc23-2a2b-4d35-9357-a3c25aedf865.png)
+
+* The second histogram represents the probability of each word (for better visualization, we only show words whose probability is greater than 0.3%).
+![alice_hist_prob](https://user-images.githubusercontent.com/112963325/197467928-4a22f16d-f3ed-4412-a66a-933d578cd864.png)
 
 
-![alice_hist](https://user-images.githubusercontent.com/112963325/197401082-445b5758-aa49-4e81-8db0-8244ec3a4a1f.png)
+
+
