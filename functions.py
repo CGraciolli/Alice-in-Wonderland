@@ -48,10 +48,10 @@ def normalize(tokenized):
     and removes suffixes
     """
     tok_lower = list(map(lambda x : x.lower(), tokenized))
-    no_stop = remove_stop_words(tok_lower)
-    no_punc = list(map(lambda x : remove_punctuation(x), no_stop))
+    no_punc = list(map(lambda x : remove_punctuation(x), tok_lower))
     no_suf = list(map(lambda x : remove_suffix(x), no_punc))
-    return no_suf
+    no_stop = remove_stop_words(no_suf)
+    return no_stop
 
 def count_words(tokenized):
     """
@@ -71,13 +71,14 @@ def word_probability(dic):
     """
     recives a frequency dictionary
     returns a new dictionary whose values are the word probability in percentage and rounded
+    if it is greater then 0.3
     """
     total = sum(list(dic.values()))
-    dic_prob = dict(map(lambda x : (x, round(dic[x]*100/total)), dic.keys()))
+    dic_prob = dict(map(lambda x : (x, dic[x]*100/total), dic.keys()))
     ##could be a filter
     dic_prob_pos = {}
     for key in dic_prob:
-        if dic_prob[key] > 0:
+        if dic_prob[key] > 0.3:
             dic_prob_pos[key] = dic_prob[key]
     return dic_prob_pos
 
@@ -93,12 +94,30 @@ def display_histogram_prob(tokenized):
     for key in keys:
         values.append(dprob[key])
     hist = sns.barplot(x=keys, y=values)
-    #hist.set(xlabel="words", ylabel="probabilities", title="Histogram of Word Probabilities")
-    hist.set_title("Histogram of Word Probabilities", fontsize=40)
+    hist.set_title("Histogram of Word Probability", fontsize=40)
     hist.set_ylabel("probabilities (in percentage)",fontsize=25)
     plt.xticks(rotation=45, fontsize=15)
     plt.show()
-    
-    
+
+def display_histogram_freq(tokenized):
+    """
+    recives a list of words
+    prints a histogram representing the word how many times each word is present in the text
+    shows only the top 30 words for better visualization
+    """
+    dfreq = count_words(tokenized)
+    items = dfreq.items()
+    items_sort = sorted(items, key= lambda x : x[1], reverse=True)
+    items_sort = items_sort[:30]
+    keys = []
+    values = []
+    for item in items_sort:
+        keys.append(item[0])
+        values.append(item[1])
+    hist = sns.barplot(x=keys, y=values)
+    hist.set_title("Histogram of Word Frequency", fontsize=40)
+    hist.set_ylabel("frequency",fontsize=25)
+    plt.xticks(rotation=45, fontsize=15)
+    plt.show()
     
 
