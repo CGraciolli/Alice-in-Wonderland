@@ -13,30 +13,17 @@ def remove_stop_words(tokenized):
 
     return list(filter(lambda x : x not in stop_words_set, tokenized))
 
-def remove_punctuation(token):
-    """
-    recives one word and returns it without punctuation
-    """
-    punc = {".", ",", ";", ":", "?", "!", "_"}
-    as_list =  list(filter(lambda x : x not in punc, token))
-    return reduce(lambda x, y : x + y, as_list, "")
 
-
-def remove_suffix(token):
+def remove_non_alphabetical(token):
     """
-    recives a string
-    if there is a non-alphabetic symbol in it
-    returns the first part of the string
-    for example, he´s -> he
-    alice´ll -> alice
+    recives a string in lower case
+    removes all the symbols that are not letters
     """
     alph = "abcdefghijklmnopqrstuvwxyz"
     ans = ""
     for symbol in token:
         if symbol in alph:
             ans += symbol
-        else:
-            break
     return ans
 
 def normalize(tokenized):
@@ -48,9 +35,9 @@ def normalize(tokenized):
     and removes suffixes
     """
     tok_lower = list(map(lambda x : x.lower(), tokenized))
-    no_punc = list(map(lambda x : remove_punctuation(x), tok_lower))
-    no_suf = list(map(lambda x : remove_suffix(x), no_punc))
-    no_stop = remove_stop_words(no_suf)
+    no_suf = list(map(lambda x : remove_non_alphabetical(x), tok_lower))
+    no_empty = list(filter(lambda x : x != "", no_suf))
+    no_stop = remove_stop_words(no_empty)
     return no_stop
 
 def count_words(tokenized):
@@ -60,11 +47,10 @@ def count_words(tokenized):
     """
     dict_freq = {}
     for word in tokenized:
-        if word != "":
-            if word in dict_freq:
-                dict_freq[word] += 1
-            else:
-                dict_freq[word] = 1
+        if word in dict_freq:
+            dict_freq[word] += 1
+        else:
+            dict_freq[word] = 1
     return dict_freq
 
 def word_probability(dic):
