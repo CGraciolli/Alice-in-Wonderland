@@ -1,4 +1,3 @@
-from functools import reduce
 from stop_words import stop_words_set
 import matplotlib.pyplot as plt
 import seaborn as sns
